@@ -5,7 +5,7 @@
 {% block content %}
 <div class="clear"></div>
     {% for pet in pets %}
-        {{ pet }}
+        <a href="/pets/{{ pet.slug }}-{{ pet.id }}">{{ pet }}</a>
         {% for image in pet.image_set.all %}
             <img class="img" src="/{{ image.image }}" alt="{{ image }}" width="100%" />
         {% endfor %}
