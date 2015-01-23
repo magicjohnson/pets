@@ -1,0 +1,181 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="catalog-categories" id="yw0">
+    <div class="categories">
+        <div class="category">
+            <div class="image">
+                <a href="/cats"><img src="{% static "images/cat.png" %}" alt="Кошки"></a></div>
+            <div class="title">
+                <a href="/cats">Кошки</a></div>
+        </div>
+        <div class="category">
+            <div class="image">
+                <a href="/dogs"><img src="{% static "images/dog.png" %}" alt="Собаки"></a></div>
+            <div class="title">
+                <a href="/dogs">Собаки</a></div>
+        </div>
+        <div class="category">
+            <div class="image">
+                <a href="/animals"><img src="{% static "images/bird.png" %}" alt="Другие животные"></a></div>
+            <div class="title">
+                <a href="/animals">Другие животные</a></div>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div class="keys" style="display:none" title="/">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+    </div>
+</div>
+<div class="clear"></div>
+<div class="portlet" id="yw1">
+    <div class="portlet-content">
+        <form style="display:block" id="seacrh-form" action="/find" method="get">
+            <div class="s-form">
+                <div class="row">
+                    <h1>Подобрать питомца</h1>
+                </div>
+                <div class="row">
+                    <div class="column">
+                        <label for="params_category">Вид животного</label>:
+                        <select class="form-group" name="params[category]" id="params_category">
+                            <option value="">Любое животное</option>
+                            <option value="1">Кошки</option>
+                            <option value="2">Собаки</option>
+                            <option value="3">Другие животные</option>
+                        </select></div>
+                    <div class="column mh">
+                        <label for="params_ageFrom">Возраст</label>:
+                        <div class="column-left">
+                            <div class="text">от</div>
+                            <input maxlength="256" type="text" name="params[ageFrom]" id="params_ageFrom">
+                            <select name="params[ageFromUnit]" id="params_ageFromUnit">
+                                <option value="7">Недель</option>
+                                <option value="30">Месяцев</option>
+                                <option value="365">Лет</option>
+                            </select>
+                        </div>
+                        <div class="column-right">
+                            <div class="text">до</div>
+                            <input maxlength="256" type="text" name="params[ageTo]" id="params_ageTo">
+                            <select name="params[ageToUnit]" id="params_ageToUnit">
+                                <option value="7">Недель</option>
+                                <option value="30">Месяцев</option>
+                                <option value="365">Лет</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="column">
+                        <label for="params_sex">Пол</label>:<br>
+                        <select name="params[sex]" id="params_sex">
+                            <option value="">Все</option>
+                            <option value="1">Самка</option>
+                            <option value="2">Самец</option>
+                        </select></div>
+                    <div class="column">
+                        <label for="params_city">Город</label>:<br>
+                        <select name="params[city]" id="params_city">
+                            <option value="">Все</option>
+                            <option value="Пенза">Пенза</option>
+                            <option value="Заречный">Заречный</option>
+                        </select></div>
+                    </div>
+
+                <div class="row">
+                    <div class="column">
+                        <div class="group-block" data-form-group="1" style="display:none">
+                            Цвет(Окрас):<br>
+                            <span id="params_color"><span class="did">
+                                <input value="Серый" id="params_color_0" type="checkbox" name="params[color][]">
+                                <label for="params_color_0">Серый</label></span>
+                                <span class="did">
+                                <input value="Черепаховый" id="params_color_1" type="checkbox" name="params[color][]">
+                                <label for="params_color_1">Черепаховый</label>
+                            </span>
+                            <span class="did">
+                                <input value="Чёрный" id="params_color_2" type="checkbox" name="params[color][]">
+                                <label for="params_color_2">Чёрный</label>
+                            </span>
+                            <span class="did"><input value="Камышовый" id="params_color_3" type="checkbox"
+                                                     name="params[color][]">
+                                <label for="params_color_3">Камышовый</label></span>
+                            <span class="did"><input value="чёрно-белый" id="params_color_4" type="checkbox"
+                                                     name="params[color][]">
+                                <label for="params_color_4">чёрно-белый</label></span>
+                            <span class="did">
+                                <input value="Рыжий" id="params_color_5" type="checkbox" name="params[color][]">
+                                <label for="params_color_5">Рыжий</label></span>
+                            <span class="did">
+                                <input value="Бело-серый" id="params_color_6" type="checkbox"
+                                       name="params[color][]">
+                                <label for="params_color_6">Бело-серый</label></span><span class="did">
+                                <input value="Белый" id="params_color_7" type="checkbox" name="params[color][]">
+                                <label for="params_color_7">Белый</label>
+                            </span>
+                            <span class="did"><input value="Трёхцветный" id="params_color_8" type="checkbox"
+                                                     name="params[color][]">
+                                <label for="params_color_8">Трёхцветный</label>
+                            </span>
+                        </span>
+                        <span class="did">
+                            <input class="check-all" data-param="color" type="checkbox" value="1"
+                                   name="check-all-color" id="check-all-color">
+                            <label for="check-all-color">Все</label>
+                        </span>
+                    </div>
+                    <div class="group-block" data-form-group="2" style="display:none"> Размер:<br>
+                        <span id="params_size">
+                            <span class="did">
+                                <input value="Маленький" id="params_size_0" type="checkbox"
+                                       name="params[size][]">
+                                <label for="params_size_0">Маленький</label>
+                            </span>
+                            <span class="did"><input value="Средний" id="params_size_1" type="checkbox"
+                                                     name="params[size][]">
+                                <label for="params_size_1">Средний</label>
+                            </span>
+                            <span class="did"><input value="Крупный" id="params_size_2" type="checkbox"
+                                                     name="params[size][]">
+                                <label for="params_size_2">Крупный</label>
+                            </span>
+                        </span>
+                        <span class="did">
+                            <input class="check-all" data-param="size" type="checkbox" value="1"
+                                   name="check-all-size" id="check-all-size">
+                            <label for="check-all-size">Все</label>
+                        </span>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="group-block" data-form-group="1 2" style="display:none"> Стерилизация и
+                        прививки:<br>
+                    <span id="params_medical"><span class="did">
+                        <input value="1" id="params_medical_0" type="checkbox" name="params[medical][]">
+                        <label for="params_medical_0">Привит</label>
+                    </span>
+                        <span class="did">
+                        <input value="2" id="params_medical_1" type="checkbox" name="params[medical][]">
+                            <label for="params_medical_1">Стерилизован</label>
+                        </span>
+                        <span class="did"><input value="3" id="params_medical_2" type="checkbox"
+                                                 name="params[medical][]">
+                            <label for="params_medical_2">Привит и стерилизован</label>
+                        </span>
+                    </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row buttons">
+                <input type="submit" name="yt0" value="Подобрать"></div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

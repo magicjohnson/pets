@@ -1,0 +1,71 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <meta name="keywords" content="CHANGE KEYWORDS"/>
+    <meta name="description" content="CHANGE DESCRIPTION"/>
+    <meta name="author" content="CHANGE ME"/>
+    <title>PETS</title>
+    <link rel="icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
+    <link href="{% static "css/style.css" %}" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="//yastatic.net/share/share.js" charset="utf-8"></script>
+</head>
+<body>
+<div class="wrapper">
+    <header>
+        <div class="inner">
+            <div class="top">
+                <div class="logo"><a href="/"><img src="{% static "images/logo.png" %}" alt=""/></a></div>
+                <div class="helps" title="Мы помогли найти дом 0 питомцам">
+                    <div class="att">0</div>
+                    <div>Мы помогли найти
+                        дом 0</div>
+                </div>
+            </div>
+            <div class="track-line"></div>
+            <div class="bot">
+                <div class="bot-l">
+                    <a href="/ja-hochu-pomoch" class="s-btn">Я хочу помочь</a>
+                    <a href="/catalog/response" class="s-btn par">Предложить животное</a>
+{#                    <a href="<?php echo $backUrl;?>" class="s-btn back"><img src="{% static "images/back.png" %}"#}
+{#                                                                             alt=""/>Вернуться</a>#}
+{#                    <a href="/catalog/favorite" class="s-btn favorite par"#}
+{#                       style="display:inline-block"><img#}
+{#                        src="{% static "images/favorite.png" %}" alt=""/>В избранном</a>#}
+                </div>
+                <div class="bot-r">
+{#                    <?php $this->widget('application.widgets.OutAreaWidget', array('name' => 'sotsseti-v-shapke')); ?>#}
+                </div>
+            </div>
+        </div>
+        <div class="delta-line"></div>
+    </header>
+    <div class="content">
+        <div class="inner">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+    <div class="empty"></div>
+</div>
+<footer>
+    <div class="delta-line r"></div>
+    <div class="footer_inner">
+        <div class="inner">
+            <div class="track-line"></div>
+            <div class="bot">
+                <div class="logo">
+                    <a href="http://te-st.ru/" target="blank"><img src="{% static "images/logo-t.png" %}" alt=""/></a>
+                </div>
+                <div class="dev">
+                    <a href="http://plus1dev.ru/" target="blank"><img src="{% static "images/logo+1.png" %}" alt=""/></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
