@@ -1,4 +1,4 @@
-{% load staticfiles %}
+{% load staticfiles %}{% load main_templatetags %}{% load cache %}
 
 <!DOCTYPE html>
 <html lang="ru">
@@ -22,7 +22,7 @@
                 <div class="helps" title="Мы помогли найти дом 0 питомцам">
                     <div class="att">0</div>
                     <div>Мы помогли найти
-                        дом 0</div>
+                        дом {% cache 900 we_helped %}{% we_helped %}{% endcache %}</div>
                 </div>
             </div>
             <div class="track-line"></div>
