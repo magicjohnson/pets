@@ -16,7 +16,7 @@ class CatListView(generic.ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        return Pet.objects.filter(animal=0)
+        return Pet.objects.filter(animal=Pet.CAT)
 
 
 class DogListView(generic.ListView):
@@ -27,6 +27,16 @@ class DogListView(generic.ListView):
 
     def get_queryset(self):
         return Pet.objects.filter(animal=Pet.DOG)
+
+
+class AnimalListView(generic.ListView):
+    model = Pet
+    context_object_name = 'pets'
+    template_name = 'pet_list.html'
+    paginate_by = 10
+
+    def get_queryset(self):
+        return Pet.objects.filter(animal=Pet.OTHER)
 
 
 class PetDetailView(generic.DetailView):
