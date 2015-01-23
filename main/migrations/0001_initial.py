@@ -23,6 +23,8 @@ class Migration(migrations.Migration):
                 ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
             ],
             options={
+                'verbose_name': '\u041e\u043f\u0435\u043a\u0443\u043d',
+                'verbose_name_plural': '\u041e\u043f\u0435\u043a\u0443\u043d\u044b',
             },
             bases=(models.Model,),
         ),
@@ -30,7 +32,7 @@ class Migration(migrations.Migration):
             name='Image',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('image', sorl.thumbnail.fields.ImageField(upload_to=b'uploads/images')),
+                ('image', sorl.thumbnail.fields.ImageField(null=True, upload_to=b'uploads/images', blank=True)),
                 ('image_url', models.CharField(max_length=255, null=True, blank=True)),
             ],
             options={
@@ -51,9 +53,12 @@ class Migration(migrations.Migration):
                 ('sterilized', models.BooleanField(default=False, verbose_name='\u0421\u0442\u0435\u0440\u0438\u0430\u043b\u0438\u0437\u043e\u0432\u0430\u043d')),
                 ('dewormed', models.BooleanField(default=False, verbose_name='\u0411\u0435\u0437 \u043f\u0430\u0440\u0430\u0437\u0438\u0442\u043e\u0432')),
                 ('history', models.TextField(verbose_name='\u0418\u0441\u0442\u043e\u0440\u0438\u044f')),
+                ('status', models.PositiveIntegerField(verbose_name='\u0421\u0442\u0430\u0442\u0443\u0441', choices=[(0, '\u0443 \u043e\u043f\u0435\u043a\u0443\u043d\u0430'), (1, '\u043d\u0430\u0448\u0435\u043b \u0445\u043e\u0437\u044f\u0438\u043d\u0430')])),
                 ('foster_parent', models.ForeignKey(verbose_name='\u0412\u0440\u0435\u043c\u0435\u043d\u043d\u044b\u0439 \u043e\u043f\u0435\u043a\u0443\u043d', to='main.FosterParent')),
             ],
             options={
+                'verbose_name': '\u0416\u0438\u0432\u043e\u0442\u043d\u043e\u0435',
+                'verbose_name_plural': '\u0416\u0438\u0432\u043e\u0442\u043d\u044b\u0435',
             },
             bases=(models.Model,),
         ),

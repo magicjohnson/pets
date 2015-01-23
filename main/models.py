@@ -17,6 +17,13 @@ class FosterParent(models.Model):
     city = models.PositiveSmallIntegerField(choices=CITY_CHOICES, verbose_name=u'Город')
     user = models.ForeignKey(User)
 
+    def __unicode__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = u'Опекун'
+        verbose_name_plural = u'Опекуны'
+
 
 class Pet(models.Model):
     MALE = 0
@@ -35,6 +42,11 @@ class Pet(models.Model):
         (OTHER, u'Другое'),
     )
 
+    STATUS_CHOICES = (
+        (0, u'у опекуна'),
+        (1, u'нашел хозяина')
+    )
+
     animal = models.PositiveSmallIntegerField(choices=ANIMAL_CHOICES, verbose_name=u'Вид животного')
     name = models.CharField(max_length=200, verbose_name=u'Кличка')
     age = models.PositiveIntegerField(verbose_name=u'Возраст')
@@ -46,9 +58,17 @@ class Pet(models.Model):
     dewormed = models.BooleanField(default=False, verbose_name=u'Без паразитов')
     foster_parent = models.ForeignKey(FosterParent, verbose_name=u'Временный опекун')
     history = models.TextField(verbose_name=u'История')
+    status = models.PositiveIntegerField(choices=STATUS_CHOICES, verbose_name=u'Статус')
+
+    def __unicode__(self):
+        return "%s %s" % (self.get_animal_display(), self.name)
+
+    class Meta:
+        verbose_name = u'Животное'
+        verbose_name_plural = u'Животные'
 
 
 class Image(models.Model):
-    image = ImageField(upload_to='uploads/images')
+    image = ImageField(upload_to='uploads/images', null=True, blank=True)
     image_url = models.CharField(max_length=255, null=True, blank=True)
     pet = models.ForeignKey(Pet)
