@@ -152,7 +152,7 @@ footer .dev img { max-width: 161px; width: 100%; vertical-align: middle; }
 
 /* Один товар */
 .catalog-category .product-view { position: relative; }
-.catalog-category .product-view .left { display: inline-block; width: 50%; vertical-align: top; }
+.catalog-category .product-view .left { display: inline-block; vertical-align: top; }
 .catalog-category .product-view .right { display: inline-block; width: 48%; padding-left: 2%; vertical-align: top; }
 .catalog-category .product-view img { margin: 0; }
 .catalog-category .product-view h1 { margin-bottom: 15px; }

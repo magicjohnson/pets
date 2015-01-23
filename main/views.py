@@ -1,19 +1,15 @@
 # -*- coding: utf-8 -*-
 
-from django.views.generic import TemplateView, ListView
-# from django.views.decorators.csrf import csrf_protect
-# from django.shortcuts import render_to_response
-# from django.template import RequestContext
-from models import Pet
+from django.views import generic
 
-# Create your views here.
+from main.models import Pet
 
 
-class HomeView(TemplateView):
+class HomeView(generic.TemplateView):
     template_name = 'home.html'
 
 
-class CatsView(ListView):
+class CatListView(generic.ListView):
     model = Pet
     context_object_name = 'pets'
     template_name = 'pet_list.html'
@@ -23,12 +19,16 @@ class CatsView(ListView):
         return Pet.objects.filter(animal=0)
 
 
-class DogsView(ListView):
+class DogListView(generic.ListView):
     model = Pet
     context_object_name = 'pets'
     template_name = 'pet_list.html'
     paginate_by = 10
 
     def get_queryset(self):
-        return Pet.objects.filter(animal=1)
-        
+        return Pet.objects.filter(animal=Pet.DOG)
+
+
+class PetDetailView(generic.DetailView):
+    template_name = 'pet_detail.html'
+    model = Pet
