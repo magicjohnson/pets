@@ -13,7 +13,7 @@ class FosterParent(models.Model):
     )
     name = models.CharField(max_length=200, verbose_name=u'Имя')
     phone = models.CharField(max_length=200, verbose_name=u'Телефон')
-    city = models.CharField(choices=CITY_CHOICES, verbose_name=u'Город')
+    city = models.PositiveSmallIntegerField(choices=CITY_CHOICES, verbose_name=u'Город')
 
 
 class Pet(models.Model):
@@ -39,9 +39,9 @@ class Pet(models.Model):
     sex = models.PositiveSmallIntegerField(choices=SEX_CHOICES, verbose_name=u'Пол')
     breed = models.CharField(max_length=500, verbose_name=u'Порода')
     color = models.CharField(max_length=200, verbose_name=u'Цвет')
-    vaccinated = models.BooleanField(verbose_name=u'Привит')
-    sterilized = models.BooleanField(verbose_name=u'Стериализован')
-    dewormed = models.BooleanField(verbose_name=u'Без паразитов')
+    vaccinated = models.BooleanField(default=False, verbose_name=u'Привит')
+    sterilized = models.BooleanField(default=False, verbose_name=u'Стериализован')
+    dewormed = models.BooleanField(default=False, verbose_name=u'Без паразитов')
     foster_parent = models.ForeignKey(FosterParent, verbose_name=u'Временный опекун')
     history = models.TextField(verbose_name=u'История')
 
