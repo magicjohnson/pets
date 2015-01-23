@@ -22,7 +22,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='pet',
             name='slug',
-            field=models.SlugField(default=datetime.datetime(2015, 1, 23, 18, 34, 37, 968307, tzinfo=utc), unique=True),
+            field=models.SlugField(default=datetime.datetime.now(), unique=True),
             preserve_default=False,
         ),
     ]
