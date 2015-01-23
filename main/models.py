@@ -35,7 +35,7 @@ class Pet(models.Model):
 
     animal = models.PositiveSmallIntegerField(choices=ANIMAL_CHOICES, verbose_name=u'Вид животного')
     name = models.CharField(max_length=200, verbose_name=u'Кличка')
-    age = models.IntegerField(verbose_name=u'Возраст')
+    age = models.PositiveIntegerField(verbose_name=u'Возраст')
     sex = models.PositiveSmallIntegerField(choices=SEX_CHOICES, verbose_name=u'Пол')
     breed = models.CharField(max_length=500, verbose_name=u'Порода')
     color = models.CharField(max_length=200, verbose_name=u'Цвет')
