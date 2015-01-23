@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load static %}
+
+{% block content %}
+<div class="clear"></div>
+    {% for pet in pets %}
+        {{ pet }}
+        {% for image in pet.image_set.all %}
+            <img class="img" src="/{{ image.image }}" alt="{{ image }}" width="100%" />
+        {% endfor %}
+    {% endfor %}
+</div>
+{% endblock %}

@@ -10,5 +10,5 @@ register = template.Library()
 
 @register.simple_tag
 def we_helped():
-    return Pet.objects.all().count()
+    return Pet.objects.filter(status=1).count()
     
