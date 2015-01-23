@@ -33,6 +33,9 @@ class PetAdmin(admin.ModelAdmin):
     inlines = (
         ImagesInline,
     )
+    prepopulated_fields = {
+        'slug': ('name',)
+    }
 
 
 @admin.register(models.FosterParent)

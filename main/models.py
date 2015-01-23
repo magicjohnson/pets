@@ -47,6 +47,15 @@ class Pet(models.Model):
         (1, u'нашел хозяина')
     )
 
+    SMALL = 0
+    MEDIUM = 1
+    LARGE = 2
+    SIZE_CHOICES = (
+        (SMALL, u'Маленький'),
+        (MEDIUM, u'Средний'),
+        (LARGE, u'Большой'),
+    )
+
     animal = models.PositiveSmallIntegerField(choices=ANIMAL_CHOICES, verbose_name=u'Вид животного')
     name = models.CharField(max_length=200, verbose_name=u'Кличка')
     age = models.PositiveIntegerField(verbose_name=u'Возраст')
@@ -58,7 +67,9 @@ class Pet(models.Model):
     dewormed = models.BooleanField(default=False, verbose_name=u'Без паразитов')
     foster_parent = models.ForeignKey(FosterParent, verbose_name=u'Временный опекун')
     history = models.TextField(verbose_name=u'История')
+    size = models.PositiveIntegerField(choices=SIZE_CHOICES, default=MEDIUM, verbose_name=u'Размер')
     status = models.PositiveIntegerField(choices=STATUS_CHOICES, verbose_name=u'Статус')
+    slug = models.SlugField(unique=True)
 
     def __unicode__(self):
         return "%s %s" % (self.get_animal_display(), self.name)
