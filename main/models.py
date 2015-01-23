@@ -1,5 +1,6 @@
 # coding=utf-8
 from django.db import models
+from django.contrib.auth.models import User
 from sorl.thumbnail import ImageField
 
 
@@ -14,6 +15,7 @@ class FosterParent(models.Model):
     name = models.CharField(max_length=200, verbose_name=u'Имя')
     phone = models.CharField(max_length=200, verbose_name=u'Телефон')
     city = models.PositiveSmallIntegerField(choices=CITY_CHOICES, verbose_name=u'Город')
+    user = models.ForeignKey(User)
 
 
 class Pet(models.Model):
