@@ -1,4 +1,5 @@
 # coding=utf-8
+from datetime import date, timedelta
 from django.contrib.auth.models import User
 
 import factory
@@ -45,7 +46,10 @@ class PetFactory(DjangoModelFactory):
     animal = fuzzy.FuzzyChoice([0, 1])
     sex = fuzzy.FuzzyChoice([0, 1])
     slug = factory.LazyAttribute(lambda o: o.name)
-    age = 4
+    birthday = fuzzy.FuzzyDate(
+        start_date=date(2013, 01, 01),
+        end_date=date.today() - timedelta(days=1)
+    )
     status = 0
 
     foster_parent = factory.SubFactory(FosterParentFactory)
