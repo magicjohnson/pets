@@ -102,7 +102,7 @@ class Image(models.Model):
         if self.image_url:
             return self.image_url
 
-        return self.image.image_url
+        return self.image.url
 
 add_permission_logic(
     Pet,
