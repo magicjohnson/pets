@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
+    'permission',
     'waffle',
     'main',
 )
@@ -98,4 +99,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "uploads")
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
+)
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',  # default
+    'permission.backends.PermissionBackend',
 )
