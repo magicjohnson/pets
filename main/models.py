@@ -87,3 +87,9 @@ class Image(models.Model):
     image = ImageField(upload_to='uploads/images', null=True, blank=True)
     image_url = models.CharField(max_length=255, null=True, blank=True)
     pet = models.ForeignKey(Pet)
+
+    def get_absolute_url(self):
+        if self.image_url:
+            return self.image_url
+
+        return self.image.image_url
