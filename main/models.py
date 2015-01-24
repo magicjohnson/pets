@@ -80,6 +80,6 @@ class Pet(models.Model):
 
 
 class Image(models.Model):
-    image = ImageField(upload_to='uploads/images', null=True, blank=True)
+    image = ImageField(upload_to='images', null=True, blank=True)
     image_url = models.CharField(max_length=255, null=True, blank=True)
     pet = models.ForeignKey(Pet)
