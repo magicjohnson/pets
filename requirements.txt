@@ -4,4 +4,5 @@ django-suit==0.2.12
 django-waffle==0.10.1
 factory-boy==2.4.1
 sorl-thumbnail==12.2
+pytz==2014.10
 wsgiref==0.1.2
