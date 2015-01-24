@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 
 from django.views import generic
-from django.template import RequestContext
-from django.shortcuts import render_to_response
 from main.models import Pet
 
 
@@ -30,10 +28,11 @@ class PetListView(generic.ListView):
         return context
 
     def get_queryset(self):
+        filters = {'visible': True}
         if self.CATEGORY is not None:
-            return Pet.objects.filter(animal=self.CATEGORY)
+            filters['animal'] = self.CATEGORY
 
-        return Pet.objects.all()
+        return Pet.objects.filter(**filters)
 
 
 class CatListView(PetListView):
