@@ -3,6 +3,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from sorl.thumbnail import ImageField
 
+from main import utils
+
 
 class FosterParent(models.Model):
     KARAGANDA = 0
@@ -58,7 +60,7 @@ class Pet(models.Model):
 
     animal = models.PositiveSmallIntegerField(choices=ANIMAL_CHOICES, verbose_name=u'Вид животного')
     name = models.CharField(max_length=200, verbose_name=u'Кличка')
-    age = models.PositiveIntegerField(verbose_name=u'Возраст')
+    birthday = models.DateField(verbose_name=u'День рождения')
     sex = models.PositiveSmallIntegerField(choices=SEX_CHOICES, verbose_name=u'Пол')
     breed = models.CharField(max_length=500, verbose_name=u'Порода')
     color = models.CharField(max_length=200, verbose_name=u'Цвет')
@@ -81,6 +83,9 @@ class Pet(models.Model):
     class Meta:
         verbose_name = u'Животное'
         verbose_name_plural = u'Животные'
+
+    def age(self):
+        return utils.age(self.birthday)
 
 
 class Image(models.Model):
