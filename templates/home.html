@@ -40,52 +40,34 @@
                 </div>
                 <div class="row">
                     <div class="column">
-                        <label for="params_category">Вид животного</label>:
-                        <select class="form-group" name="params[category]" id="params_category">
-                            <option value="">Любое животное</option>
-                            <option value="1">Кошки</option>
-                            <option value="2">Собаки</option>
-                            <option value="3">Другие животные</option>
-                        </select></div>
+                        <label for="params_category">{{ form.animal.label }}</label>
+                        {{ form.animal }}
+                    </div>
                     <div class="column mh">
                         <label for="params_ageFrom">Возраст</label>:
                         <div class="column-left">
-                            <div class="text">от</div>
-                            <input maxlength="256" type="text" name="params[ageFrom]" id="params_ageFrom">
-                            <select name="params[ageFromUnit]" id="params_ageFromUnit">
-                                <option value="7">Недель</option>
-                                <option value="30">Месяцев</option>
-                                <option value="365">Лет</option>
-                            </select>
+                            <div class="text">{{ form.from_age.label }}</div>
+                            {{ form.from_age }}
+                            {{ form.from_age_units }}
                         </div>
                         <div class="column-right">
-                            <div class="text">до</div>
-                            <input maxlength="256" type="text" name="params[ageTo]" id="params_ageTo">
-                            <select name="params[ageToUnit]" id="params_ageToUnit">
-                                <option value="7">Недель</option>
-                                <option value="30">Месяцев</option>
-                                <option value="365">Лет</option>
-                            </select>
+                            <div class="text">{{ form.to_age.label }}</div>
+                            {{ form.to_age }}
+                            {{ form.to_age_units }}
                         </div>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="column">
-                        <label for="params_sex">Пол</label>:<br>
-                        <select name="params[sex]" id="params_sex">
-                            <option value="">Все</option>
-                            <option value="1">Самка</option>
-                            <option value="2">Самец</option>
-                        </select></div>
-                    <div class="column">
-                        <label for="params_city">Город</label>:<br>
-                        <select name="params[city]" id="params_city">
-                            <option value="">Все</option>
-                            <option value="Пенза">Пенза</option>
-                            <option value="Заречный">Заречный</option>
-                        </select></div>
+                        <label for="params_sex">{{ form.sex.label }}</label>:<br>
+                        {{ form.sex }}
                     </div>
+                    <div class="column">
+                        <label for="params_city">{{ form.city.label }}</label>:<br>
+                        {{ form.city }}
+                    </div>    
+                </div>
 
                 <div class="row">
                     <div class="column">
