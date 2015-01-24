@@ -44,9 +44,9 @@ class PetFactory(DjangoModelFactory):
     name = fuzzy.FuzzyText(prefix="pet", length=4, chars="0123456789")
     animal = fuzzy.FuzzyChoice([0, 1])
     sex = fuzzy.FuzzyChoice([0, 1])
+    slug = factory.LazyAttribute(lambda o: o.name)
     age = 4
     status = 0
-    slug = name
 
     foster_parent = factory.SubFactory(FosterParentFactory)
 
