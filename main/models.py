@@ -74,6 +74,10 @@ class Pet(models.Model):
     def __unicode__(self):
         return "%s %s" % (self.get_animal_display(), self.name)
 
+    def get_absolute_url(self):
+        from django.core.urlresolvers import reverse
+        return reverse('pet-detail', args=[str(self.slug)])
+
     class Meta:
         verbose_name = u'Животное'
         verbose_name_plural = u'Животные'
@@ -83,3 +87,9 @@ class Image(models.Model):
     image = ImageField(upload_to='images', null=True, blank=True)
     image_url = models.CharField(max_length=255, null=True, blank=True)
     pet = models.ForeignKey(Pet)
+
+    def get_absolute_url(self):
+        if self.image_url:
+            return self.image_url
+
+        return self.image.image_url
