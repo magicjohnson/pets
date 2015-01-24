@@ -71,19 +71,21 @@ class Pet(models.Model):
     history = models.TextField(verbose_name=u'История')
     size = models.PositiveIntegerField(choices=SIZE_CHOICES, default=MEDIUM, verbose_name=u'Размер')
     status = models.PositiveIntegerField(choices=STATUS_CHOICES, verbose_name=u'Статус')
-    slug = models.SlugField(unique=True)
+    visible = models.BooleanField(default=False, verbose_name=u'Показать на сайте')
+    slug = models.SlugField()
 
     def __unicode__(self):
         return "%s %s" % (self.get_animal_display(), self.name)
 
     def get_absolute_url(self):
         from django.core.urlresolvers import reverse
-        return reverse('pet-detail', args=[str(self.slug)])
+        return reverse('pet-detail', args=[str(self.slug), str(self.pk)])
 
     class Meta:
         verbose_name = u'Животное'
         verbose_name_plural = u'Животные'
 
+    @property
     def age(self):
         return utils.age(self.birthday)
 
