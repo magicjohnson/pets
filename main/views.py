@@ -10,38 +10,42 @@ class HomeView(generic.TemplateView):
     template_name = 'home.html'
 
 
-class CatListView(generic.ListView):
+class PetDetailView(generic.DetailView):
+    template_name = 'pet_detail.html'
+    model = Pet
+
+
+class PetListView(generic.ListView):
     model = Pet
     context_object_name = 'pets'
     template_name = 'pet_list.html'
     paginate_by = 10
+    CATEGORY = None
+    CATEGORY_VERBOSE = None
+
+    def get_context_data(self, **kwargs):
+        context = super(PetListView, self).get_context_data(**kwargs)
+        context['pet_category'] = self.CATEGORY
+        context['pet_category_verbose'] = self.CATEGORY_VERBOSE
+        return context
 
     def get_queryset(self):
-        return Pet.objects.filter(animal=Pet.CAT)
+        if self.CATEGORY is not None:
+            return Pet.objects.filter(animal=self.CATEGORY)
 
+        return Pet.objects.all()
 
-class DogListView(generic.ListView):
-    model = Pet
-    context_object_name = 'pets'
-    template_name = 'pet_list.html'
-    paginate_by = 10
-
-    def get_queryset(self):
-        return Pet.objects.filter(animal=Pet.DOG)
 
 class CatListView(PetListView):
-    queryset = Pet.objects.filter(animal=Pet.CAT)
+    CATEGORY = Pet.CAT
+    CATEGORY_VERBOSE = u'Кошки'
 
-class AnimalListView(generic.ListView):
-    model = Pet
-    context_object_name = 'pets'
-    template_name = 'pet_list.html'
-    paginate_by = 10
 
-    def get_queryset(self):
-        return Pet.objects.filter(animal=Pet.OTHER)
+class DogListView(PetListView):
+    CATEGORY = Pet.DOG
+    CATEGORY_VERBOSE = u'Собаки'
 
 
 class AnimalListView(PetListView):
-    queryset = Pet.objects.filter(animal=Pet.OTHER)
-
+    CATEGORY = Pet.OTHER
+    CATEGORY_VERBOSE = u'Другие животные'
