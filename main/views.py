@@ -22,8 +22,14 @@ class PetListView(generic.ListView):
     CATEGORY_VERBOSE = None
 
     def get_context_data(self, **kwargs):
+        css_class = {
+            0: 'cat',
+            1: 'dog',
+            2: 'bird'
+        }
+        
         context = super(PetListView, self).get_context_data(**kwargs)
-        context['pet_category'] = self.CATEGORY
+        context['pet_category'] = css_class[self.CATEGORY]
         context['pet_category_verbose'] = self.CATEGORY_VERBOSE
         return context
 
