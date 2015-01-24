@@ -74,6 +74,10 @@ class Pet(models.Model):
     def __unicode__(self):
         return "%s %s" % (self.get_animal_display(), self.name)
 
+    def get_absolute_url(self):
+        from django.core.urlresolvers import reverse
+        return reverse('pet-detail', args=[str(self.slug)])
+
     class Meta:
         verbose_name = u'Животное'
         verbose_name_plural = u'Животные'
