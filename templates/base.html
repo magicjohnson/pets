@@ -1,4 +1,7 @@
-{% load staticfiles %}{% load main_templatetags %}{% load cache %}
+{% load staticfiles %}
+{% load waffle_tags %}
+{% load cache %}
+{% load main_templatetags %}
 
 <!DOCTYPE html>
 <html lang="ru">
@@ -20,24 +23,32 @@
             <div class="top">
                 <div class="logo"><a href="/"><img src="{% static "images/logo.png" %}" alt=""/></a></div>
                 <div class="helps" title="Мы помогли найти дом 0 питомцам">
-                    <div class="att">0</div>
-                    <div>Мы помогли найти
-                        дом {% cache 900 we_helped %}{% we_helped %}{% endcache %}</div>
+                    {% flag "HELPED_COUNT" %}
+                        <div class="att">0</div>
+                        <div>Мы помогли найти
+                            дом {% cache 900 we_helped %}{% we_helped %}{% endcache %} животным
+                        </div>
+                    {% endflag %}
                 </div>
+
             </div>
             <div class="track-line"></div>
             <div class="bot">
                 <div class="bot-l">
-                    <a href="/ja-hochu-pomoch" class="s-btn">Я хочу помочь</a>
-                    <a href="/catalog/response" class="s-btn par">Предложить животное</a>
-{#                    <a href="<?php echo $backUrl;?>" class="s-btn back"><img src="{% static "images/back.png" %}"#}
-{#                                                                             alt=""/>Вернуться</a>#}
-{#                    <a href="/catalog/favorite" class="s-btn favorite par"#}
-{#                       style="display:inline-block"><img#}
-{#                        src="{% static "images/favorite.png" %}" alt=""/>В избранном</a>#}
+                    {% flag "OFFER_HELP" %}
+                        <a href="/ja-hochu-pomoch" class="s-btn">Я хочу помочь</a>
+                    {% endflag %}
+                    {% flag "OFFER_PET" %}
+                        <a href="/catalog/response" class="s-btn par">Предложить животное</a>
+                    {% endflag %}
+                    {#                    <a href="<?php echo $backUrl;?>" class="s-btn back"><img src="{% static "images/back.png" %}"#}
+                    {#                                                                             alt=""/>Вернуться</a>#}
+                    {#                    <a href="/catalog/favorite" class="s-btn favorite par"#}
+                    {#                       style="display:inline-block"><img#}
+                    {#                        src="{% static "images/favorite.png" %}" alt=""/>В избранном</a>#}
                 </div>
                 <div class="bot-r">
-{#                    <?php $this->widget('application.widgets.OutAreaWidget', array('name' => 'sotsseti-v-shapke')); ?>#}
+                    {#                    <?php $this->widget('application.widgets.OutAreaWidget', array('name' => 'sotsseti-v-shapke')); ?>#}
                 </div>
             </div>
         </div>
@@ -61,7 +72,8 @@
                     <a href="http://te-st.ru/" target="blank"><img src="{% static "images/logo-t.png" %}" alt=""/></a>
                 </div>
                 <div class="dev">
-                    <a href="http://plus1dev.ru/" target="blank"><img src="{% static "images/logo+1.png" %}" alt=""/></a>
+                    <a href="http://plus1dev.ru/" target="blank"><img src="{% static "images/logo+1.png" %}"
+                                                                      alt=""/></a>
                 </div>
             </div>
         </div>
