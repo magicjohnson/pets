@@ -1,6 +1,7 @@
 Django==1.7.3
 Pillow==2.7.0
 django-extensions==1.4.9
+django-permission==0.8.3
 django-suit==0.2.12
 django-waffle==0.10.1
 factory-boy==2.4.1

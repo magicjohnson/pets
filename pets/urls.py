@@ -3,6 +3,10 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 
+import permission
+
+permission.autodiscover()
+
 urlpatterns = patterns('',
     url(r'^', include('main.urls')),
     url(r'^admin/', include(admin.site.urls)),
