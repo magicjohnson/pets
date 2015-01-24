@@ -25,7 +25,7 @@ def age(d, now=None):
     since = delta.days
 
     if since <= 0:
-        raise ValueError("Birthday can not be in future")
+        return 0
 
     count, i = 0, 0
     days, name = chunks[i]
