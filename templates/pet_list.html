@@ -15,15 +15,9 @@
             <div class="items">
                 {% for pet in pets %}
                 <div class="product nm{{ forloop.counter }}">
-                    <a href="/pets/{{ pet.slug }}">
+                    <a href="{{ pet.get_absolute_url }}">
                         <div class="image">
-                            {% with pet.image_set.all|first as image %}
-                                {% if image %}
-                                    <img alt="{{ pet.name }}" src="{% get_media_prefix %}{{ image.image }}"></img>
-                                {% else %}
-                                    <img alt="{{ pet.name }}" src="{% static "images/placeholder.png" %}"></img>
-                                {% endif %}
-                            {% endwith %}
+                            <img alt="{{ pet.name }}" src="{{ pet.get_primary_image }}"></img>
                             <img class="add-favorite" style="display:block" title="Добавить в избранное" alt="Добавить в избранное" data-id="53" src="{% static "images/add-fav.png" %}"></img>
                             <img class="add-favorite-hover" style="display:none;" title="Убрать из избранного" alt="Убрать из избранного" data-id="53" src="{% static "images/add-fav-hover.png" %}"></img>
                         </div>
@@ -38,10 +32,8 @@
         </div>
     </div>
     
-        <a href="/pets/{{ pet.slug }}-{{ pet.id }}">{{ pet }}</a>
-        {% for image in pet.image_set.all %}
-            <img class="img" src="/{{ image.image }}" alt="{{ image }}" width="100%" />
-        {% endfor %}
+        <a href="{{ pet.get_absolute_url }}">{{ pet }}</a>
+        <img alt="{{ pet.name }}" src="{{ pet.get_primary_image }}"></img>
     
 </div>
 {% endblock %}
