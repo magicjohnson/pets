@@ -1,7 +1,10 @@
 # coding=utf-8
 from django.db import models
 from django.contrib.auth.models import User
+
 from sorl.thumbnail import ImageField
+from permission import add_permission_logic
+from permission.logics import AuthorPermissionLogic
 
 from main import utils
 
@@ -108,3 +111,23 @@ class Image(models.Model):
             return self.image_url
 
         return self.image.url
+
+add_permission_logic(
+    Pet,
+    AuthorPermissionLogic(
+        field_name='foster_parent__user',
+        any_permission=False,
+        change_permission=True,
+        delete_permission=False,
+    )
+)
+
+add_permission_logic(
+    FosterParent,
+    AuthorPermissionLogic(
+        field_name='user',
+        any_permission=False,
+        change_permission=True,
+        delete_permission=False,
+    )
+)

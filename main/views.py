@@ -23,7 +23,7 @@ class PetListView(generic.ListView):
     model = Pet
     context_object_name = 'pets'
     template_name = 'pet_list.html'
-    paginate_by = 10
+    paginate_by = 12
     CATEGORY = None
     CATEGORY_VERBOSE = None
 
