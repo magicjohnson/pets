@@ -15,7 +15,7 @@
 			<div class="items">
 				{% for pet in pets %}
 				<div class="product nm{{ forloop.counter }}">
-					<a href="/pets/{{ pet.slug }}-{{ pet.id }}">
+					<a href="/pets/{{ pet.slug }}">
 						<div class="image">
 							{% with pet.image_set.all|first as image %}
 								<img alt="{{ pet.name }}" src="{% get_media_prefix %}{{ image.image }}"></img>
@@ -24,7 +24,7 @@
 							<img class="add-favorite-hover" style="display:none;" title="Убрать из избранного" alt="Убрать из избранного" data-id="53" src="{% static "images/add-fav-hover.png" %}"></img>
 						</div>
 						<div class="title">{{ pet.name }}</div>
-						<div class="age">{{ pet.age }}</div>
+						<div class="age">{{ pet.birthday }}</div>
 						<div class="sex">{{ pet.sex }}</div>
 					</a>
 				</div>
