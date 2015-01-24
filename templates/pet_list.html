@@ -14,7 +14,7 @@
         <div id="product-list" class="list-view">
             <div class="items">
                 {% for pet in pets %}
-                <div class="product nm{{ forloop.counter }}">
+                <div class="product{% if forloop.counter|divisibleby:3 %} nm3{% endif %}">
                     <a href="{{ pet.get_absolute_url }}">
                         <div class="image">
                             <img alt="{{ pet.name }}" src="{{ pet.get_primary_image }}"></img>
