@@ -4,14 +4,11 @@ from django.contrib.auth import get_permission_codename
 from main import models
 
 
-class PerObjectModelAdmin(admin.ModelAdmin):
+class PerObjectAccessAdmin(admin.ModelAdmin):
     def has_change_permission(self, request, obj=None):
         opts = self.opts
         codename = get_permission_codename('change', opts)
         return request.user.has_perm("%s.%s" % (opts.app_label, codename), obj)
-
-    def has_add_permission(self, request):
-        return request.user.is_staff
 
 
 class ImagesInline(admin.TabularInline):
@@ -20,9 +17,9 @@ class ImagesInline(admin.TabularInline):
 
 
 @admin.register(models.Pet)
-class PetAdmin(PerObjectModelAdmin):
+class PetAdmin(PerObjectAccessAdmin):
     def formfield_for_foreignkey(self, db_field, request=None, **kwargs):
-        if db_field.name == 'foster_parent':
+        if db_field.name == 'foster_parent' and not request.user.is_superuser:
             kwargs['queryset'] = models.FosterParent.objects.filter(user=request.user)
 
         return super(PetAdmin, self).formfield_for_foreignkey(db_field, request=request, **kwargs)
@@ -69,9 +66,6 @@ class FosterParent(admin.ModelAdmin):
     list_filter = (
         'city',
     )
-
-    def has_add_permission(self, request):
-        return request.user.is_staff
 
     def save_model(self, request, obj, form, change):
         obj.user = request.user
