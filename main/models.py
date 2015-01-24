@@ -84,6 +84,14 @@ class Pet(models.Model):
         from django.core.urlresolvers import reverse
         return reverse('pet-detail', args=[str(self.slug), str(self.pk)])
 
+    def get_primary_image(self):
+        from django.conf import settings
+        image = Image.objects.filter(pet=self)
+        if image.count() > 0:
+            return image[0].get_absolute_url()
+        else:
+            return '%s%s' % (settings.STATIC_URL, 'images/placeholder.png')
+
     class Meta:
         verbose_name = u'Животное'
         verbose_name_plural = u'Животные'
