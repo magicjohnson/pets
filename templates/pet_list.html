@@ -25,7 +25,7 @@
 						</div>
 						<div class="title">{{ pet.name }}</div>
 						<div class="age">{{ pet.age }}</div>
-						<div class="sex">{{ pet.sex }}</div>
+						<div class="sex">{{ pet.get_sex_display }}</div>
 					</a>
 				</div>
 				{% if forloop.counter|divisibleby:3 %}<div class="track-line"></div>{% endif %}
