@@ -4,40 +4,36 @@
 
 {% block content %}
 <div class="catalog-category">
-	<h1 class="{{ pet_category }}">
-		<span>
-			{{ pet_category_verbose }}
-		</span>
-	</h1>
-	<div id="yw0" class="portlet"></div>
-	<div class="products">
-		<div id="product-list" class="list-view">
-			<div class="items">
-				{% for pet in pets %}
-				<div class="product nm{{ forloop.counter }}">
-					<a href="/pets/{{ pet.slug }}">
-						<div class="image">
-							{% with pet.image_set.all|first as image %}
-								<img alt="{{ pet.name }}" src="{% get_media_prefix %}{{ image.image }}"></img>
-							{% endwith %}
-							<img class="add-favorite" style="display:block" title="Добавить в избранное" alt="Добавить в избранное" data-id="53" src="{% static "images/add-fav.png" %}"></img>
-							<img class="add-favorite-hover" style="display:none;" title="Убрать из избранного" alt="Убрать из избранного" data-id="53" src="{% static "images/add-fav-hover.png" %}"></img>
-						</div>
-						<div class="title">{{ pet.name }}</div>
-						<div class="age">{{ pet.age }}</div>
-						<div class="sex">{{ pet.sex }}</div>
-					</a>
-				</div>
-				{% if forloop.counter|divisibleby:3 %}<div class="track-line"></div>{% endif %}
-				{% endfor %}
-			</div>
-		</div>
-	</div>
+    <h1 class="{{ pet_category }}">
+        <span>
+            {{ pet_category_verbose }}
+        </span>
+    </h1>
+    <div id="yw0" class="portlet"></div>
+    <div class="products">
+        <div id="product-list" class="list-view">
+            <div class="items">
+                {% for pet in pets %}
+                <div class="product{% if forloop.counter|divisibleby:3 %} nm3{% endif %}">
+                    <a href="{{ pet.get_absolute_url }}">
+                        <div class="image">
+                            <img alt="{{ pet.name }}" src="{{ pet.get_primary_image }}"></img>
+                            <img class="add-favorite" style="display:block" title="Добавить в избранное" alt="Добавить в избранное" data-id="53" src="{% static "images/add-fav.png" %}"></img>
+                            <img class="add-favorite-hover" style="display:none;" title="Убрать из избранного" alt="Убрать из избранного" data-id="53" src="{% static "images/add-fav-hover.png" %}"></img>
+                        </div>
+                        <div class="title">{{ pet.name }}</div>
+                        <div class="age">{{ pet.age }}</div>
+                        <div class="sex">{{ pet.get_sex_display }}</div>
+                    </a>
+                </div>
+                {% if forloop.counter|divisibleby:3 %}<div class="track-line"></div>{% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
     
-        <a href="/pets/{{ pet.slug }}-{{ pet.id }}">{{ pet }}</a>
-        {% for image in pet.image_set.all %}
-            <img class="img" src="/{{ image.image }}" alt="{{ image }}" width="100%" />
-        {% endfor %}
+        <a href="{{ pet.get_absolute_url }}">{{ pet }}</a>
+        <img alt="{{ pet.name }}" src="{{ pet.get_primary_image }}"></img>
     
 </div>
 {% endblock %}

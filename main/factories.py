@@ -51,6 +51,7 @@ class PetFactory(DjangoModelFactory):
         end_date=date.today() - timedelta(days=1)
     )
     status = 0
+    visible = True
 
     foster_parent = factory.SubFactory(FosterParentFactory)
 
