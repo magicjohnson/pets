@@ -58,18 +58,17 @@ def validate_birthday(date):
 
 
 def get_birthdate(value, units, now=None):
-    WEEKS = 0
-    MONTHS = 1
-    YEARS = 2
-
     if now and isinstance(now, datetime.datetime):
         now = datetime.date(now.year, now.month, now.day)
 
     if not now:
         now = datetime.date.today()
 
-    days_to_substract = int(units)*int(value)
+    try:
+        days_to_substract = int(units)*int(value)
+    except Exception, e:
+        return e
+    else:
+        birthdate = now - datetime.timedelta(days=days_to_substract)
 
-    birthdate = now - datetime.timedelta(days=days_to_substract)
-
-    return birthdate
+        return birthdate

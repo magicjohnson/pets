@@ -28,7 +28,7 @@ class SearchForm(forms.Form):
                 'name': 'params[category]'
                 }
         ),
-        label="Вид животного",
+        label=u"Вид животного",
         required=False
     )
     sex = forms.CharField(
@@ -40,7 +40,7 @@ class SearchForm(forms.Form):
                 'name': 'params[sex]'
             }
         ),
-        label="Пол",
+        label=u"Пол",
         required=False
     )
     from_age = forms.IntegerField(
@@ -51,7 +51,7 @@ class SearchForm(forms.Form):
             }
         ),
         min_value=1,
-        label="от",
+        label=u"от",
         required=False
     )
     from_age_units = forms.CharField(
@@ -73,7 +73,7 @@ class SearchForm(forms.Form):
             }
         ),
         min_value=1,
-        label="до",
+        label=u"до",
         required=False
     )
     to_age_units = forms.CharField(
@@ -96,6 +96,6 @@ class SearchForm(forms.Form):
                 'name': 'params[city]'
             }
         ),
-        label="Город",
+        label=u"Город",
         required=False
     )
