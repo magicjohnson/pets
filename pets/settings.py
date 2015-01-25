@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
+    'ckeditor',
     'permission',
     'waffle',
     'main',
@@ -96,6 +97,16 @@ STATIC_URL = '/static/'
 
 MEDIA_URL = '/uploads/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "uploads")
+
+CKEDITOR_UPLOAD_PATH = 'ck'
+CKEDITOR_IMAGE_BACKEND = 'pillow'
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'height': 200,
+        'width': 600,
+    },
+}
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),

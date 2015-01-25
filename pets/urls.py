@@ -10,6 +10,8 @@ permission.autodiscover()
 urlpatterns = patterns('',
     url(r'^', include('main.urls')),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^ckeditor/', include('ckeditor.urls')),
+
 ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

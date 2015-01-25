@@ -1,5 +1,8 @@
+from django import forms
 from django.contrib import admin
 from django.contrib.auth import get_permission_codename
+
+from ckeditor.widgets import CKEditorWidget
 
 from main import models
 
@@ -16,8 +19,16 @@ class ImagesInline(admin.TabularInline):
     fk_name = 'pet'
 
 
+class PetAdminForm(forms.ModelForm):
+    history = forms.CharField(widget=CKEditorWidget())
+
+    class Meta:
+        model = models.Pet
+        fields = '__all__'
+
 @admin.register(models.Pet)
 class PetAdmin(PerObjectAccessAdmin):
+    form = PetAdminForm
     list_display = (
         'name',
         'age',
