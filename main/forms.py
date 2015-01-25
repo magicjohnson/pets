@@ -5,9 +5,9 @@ from main.models import Pet, FosterParent
 
 
 class SearchForm(forms.Form):
-    WEEKS = 0
-    MONTHS = 1
-    YEARS = 2
+    WEEKS = 7
+    MONTHS = 30
+    YEARS = 365
 
     UNIT_CHOICES = (
         (WEEKS, u'Недель'),

@@ -57,12 +57,7 @@ def get_birthdate(value, units, now=None):
     if not now:
         now = datetime.date.today()
 
-    if int(units) == WEEKS:
-        days_to_substract = 7*value
-    elif int(units) == MONTHS:
-        days_to_substract = 30*value
-    elif int(units) == YEARS:
-        days_to_substract = 365*value
+    days_to_substract = int(units)*int(value)
 
     birthdate = now - datetime.timedelta(days=days_to_substract)
 
