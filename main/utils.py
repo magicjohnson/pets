@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 import datetime
+from django.core.exceptions import ValidationError
 
 from django.utils.translation import ugettext, ungettext_lazy
 
@@ -44,3 +45,13 @@ def age(d, now=None):
         if count2 != 0:
             result += ugettext(', ') + name2 % count2
     return result
+
+
+def validate_birthday(date):
+    if isinstance(date, datetime.datetime):
+        date = datetime.date(year=date.year, month=date.month, day=date.day)
+
+    today = date.today()
+    delta = today - date
+    if delta.days < 0:
+        raise ValidationError(u'День рождения %s может быть только в прошлом' % date)

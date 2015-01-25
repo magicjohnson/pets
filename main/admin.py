@@ -1,5 +1,8 @@
+from django import forms
 from django.contrib import admin
 from django.contrib.auth import get_permission_codename
+
+from ckeditor.widgets import CKEditorWidget
 
 from main import models
 
@@ -16,14 +19,16 @@ class ImagesInline(admin.TabularInline):
     fk_name = 'pet'
 
 
+class PetAdminForm(forms.ModelForm):
+    history = forms.CharField(widget=CKEditorWidget())
+
+    class Meta:
+        model = models.Pet
+        fields = '__all__'
+
 @admin.register(models.Pet)
 class PetAdmin(PerObjectAccessAdmin):
-    def formfield_for_foreignkey(self, db_field, request=None, **kwargs):
-        if db_field.name == 'foster_parent' and not request.user.is_superuser:
-            kwargs['queryset'] = models.FosterParent.objects.filter(user=request.user)
-
-        return super(PetAdmin, self).formfield_for_foreignkey(db_field, request=request, **kwargs)
-
+    form = PetAdminForm
     list_display = (
         'name',
         'age',
@@ -51,6 +56,23 @@ class PetAdmin(PerObjectAccessAdmin):
         'slug': ('name',)
     }
 
+    def formfield_for_foreignkey(self, db_field, request=None, **kwargs):
+        if db_field.name == 'foster_parent' and not request.user.is_superuser:
+            kwargs['queryset'] = models.FosterParent.objects.filter(user=request.user)
+
+        return super(PetAdmin, self).formfield_for_foreignkey(db_field, request=request, **kwargs)
+
+    def get_changelist(self, request, **kwargs):
+        from django.contrib.admin.views.main import ChangeList
+
+        class FilteredPetsChangeList(ChangeList):
+            def get_queryset(self, request):
+                qs = super(FilteredPetsChangeList, self).get_queryset(request)
+                if not request.user.is_superuser:
+                    qs = qs.filter(foster_parent__user_id=request.user.id)
+                return qs
+
+        return FilteredPetsChangeList
 
 
 @admin.register(models.FosterParent)
@@ -70,3 +92,15 @@ class FosterParent(admin.ModelAdmin):
     def save_model(self, request, obj, form, change):
         obj.user = request.user
         obj.save()
+
+    def get_changelist(self, request, **kwargs):
+        from django.contrib.admin.views.main import ChangeList
+
+        class FilteredParentsChangeList(ChangeList):
+            def get_queryset(self, request):
+                qs = super(FilteredParentsChangeList, self).get_queryset(request)
+                if not request.user.is_superuser:
+                    qs = qs.filter(user_id=request.user.id)
+                return qs
+
+        return FilteredParentsChangeList

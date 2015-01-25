@@ -63,7 +63,7 @@ class Pet(models.Model):
 
     animal = models.PositiveSmallIntegerField(choices=ANIMAL_CHOICES, verbose_name=u'Вид животного')
     name = models.CharField(max_length=200, verbose_name=u'Кличка')
-    birthday = models.DateField(verbose_name=u'День рождения')
+    birthday = models.DateField(validators=[utils.validate_birthday], verbose_name=u'День рождения')
     sex = models.PositiveSmallIntegerField(choices=SEX_CHOICES, verbose_name=u'Пол')
     breed = models.CharField(max_length=500, verbose_name=u'Порода')
     color = models.CharField(max_length=200, verbose_name=u'Цвет')
