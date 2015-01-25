@@ -22,7 +22,7 @@
         <div class="inner">
             <div class="top">
                 <div class="logo"><a href="/"><img src="{% static "images/logo.png" %}" alt=""/></a></div>
-                <div class="helps" title="Мы помогли найти дом {% cache 900 we_helped %}{% we_helped %}{% endcache %} питомцам">
+                <div class="helps" title="{% flag "HELPED_COUNT" %}Мы помогли найти дом {% cache 900 we_helped %}{% we_helped %}{% endcache %} питомцам{% endflag %}">
                     {% flag "HELPED_COUNT" %}
                         <div class="att">0</div>
                         <div>Мы помогли найти
