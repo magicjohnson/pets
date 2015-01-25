@@ -96,9 +96,10 @@ class Pet(models.Model):
         verbose_name = u'Животное'
         verbose_name_plural = u'Животные'
 
-    @property
     def age(self):
         return utils.age(self.birthday)
+
+    age.short_description = u'Возраст'
 
 
 class Image(models.Model):

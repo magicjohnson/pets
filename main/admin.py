@@ -1,3 +1,4 @@
+# coding=utf-8
 from django import forms
 from django.contrib import admin
 from django.contrib.auth import get_permission_codename
@@ -20,11 +21,12 @@ class ImagesInline(admin.TabularInline):
 
 
 class PetAdminForm(forms.ModelForm):
-    history = forms.CharField(widget=CKEditorWidget())
-
     class Meta:
         model = models.Pet
         fields = '__all__'
+        widgets = {
+            'history': CKEditorWidget(),
+        }
 
 @admin.register(models.Pet)
 class PetAdmin(PerObjectAccessAdmin):
